@@ -1,0 +1,2 @@
+station_id,station_name,city,country,latitude,longitude,elevation_m,timezone,source_dataset,source_file,sampling_interval_minutes,temperature_unit,pressure_unit,humidity_unit
+JENA,Jena Weather Station,Jena,Germany,50.9271,11.5892,155,Europe/Berlin,Jena Climate 2009-2016,jena_climate_2009_2016.xlsx,10,degC,mbar,percent
