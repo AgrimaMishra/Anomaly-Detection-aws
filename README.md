@@ -1,8 +1,7 @@
 # SkyGuard AI
 
-Phase 1 provides a deterministic weather-normalization pipeline for the supplied
-Jena climate workbook. It produces UTC-aware, station-sorted canonical observations
-and a machine-readable data-quality report. Phase 2 has not started.
+SkyGuard AI currently provides a deterministic weather-normalization pipeline and
+seeded synthetic anomaly injection for training and evaluation data.
 
 ## Requirements
 
@@ -35,14 +34,32 @@ source row numbers, and quality flags remain available in the Parquet output.
 Pressure is renamed from mbar to hPa without numeric scaling because 1 mbar equals
 1 hPa.
 
+## Inject labelled anomalies
+
+```powershell
+python scripts/inject_anomalies.py --seed 42
+```
+
+Outputs:
+
+- `data/processed/labelled_train.csv`
+- `data/processed/labelled_test.csv`
+- `reports/anomaly_injection_report.json`
+
+The split is chronological (80% train, 20% test) and occurs before injection.
+Supported faults are isolated spikes, frozen sensor blocks, gradual drift, missing
+sensor blocks, sustained pressure jumps, and impossible humidity patterns. Every
+labelled row retains the original temperature, pressure, and humidity values plus
+the injected values, injection method, seed, severity, sensor, and event identifier.
+
 ## Tests
 
 ```powershell
 python -m unittest discover -s tests -v
 ```
 
-The tests cover schema, timezone, ordering, uniqueness, units, source immutability,
-quality-report fields, suspect-value detection, and byte-for-byte determinism.
+The tests cover Phase 1 schema and normalization plus every Phase 2 fault type,
+original-value retention, chronological splitting, severity bounds, and byte-for-byte
+determinism.
 
 GitHub Actions runs the same suite on Python 3.11 for every push and pull request.
-
