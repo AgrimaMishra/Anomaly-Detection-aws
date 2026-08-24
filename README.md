@@ -24,8 +24,9 @@ Outputs:
 - `data/processed/observations.parquet`
 - `reports/data_quality_report.json`
 
-Full generated datasets and reports are intentionally ignored by Git. A small,
-redistributable 24-hour example is tracked at `data/sample_observations.csv`.
+The repository includes the original workbook, canonical CSV and Parquet outputs,
+both Phase 2 labelled datasets, and a small 24-hour sample. File sizes, purposes,
+and SHA-256 checksums are recorded in `data/DATASETS.md`.
 
 The pipeline interprets source timestamps in `Europe/Berlin`, resolves repeated
 daylight-saving wall times deterministically, converts to UTC, performs a stable

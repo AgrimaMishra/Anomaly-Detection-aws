@@ -14,7 +14,12 @@ venv/
 # Full datasets and generated reports stay local.
 data/raw/*
 !data/raw/.gitkeep
+!data/raw/jena_climate_2009_2016.xlsx
 data/processed/*
 !data/processed/.gitkeep
+!data/processed/observations.csv
+!data/processed/observations.parquet
+!data/processed/labelled_train.csv
+!data/processed/labelled_test.csv
 reports/*
 !reports/.gitkeep
